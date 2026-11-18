@@ -1,0 +1,62 @@
+window.readings = [
+  {
+    id: 'repair', level: 'B2', topic: 'Community and sustainability', title: 'The Repair Café',
+    summary: 'How can a repair café keep useful objects and practical skills in the community?',
+    paragraphs: [
+      'On the first Saturday of each month, a public library turns its meeting room into a repair café. Visitors bring broken lamps, torn jackets and small appliances. Volunteers provide tools and guidance, but visitors are encouraged to take part in the repair. The organisers hope people will leave with both a working object and the confidence to fix something else at home.',
+      'In its first three months, the café recorded a successful repair for about half of the objects brought in. That figure alone suggests a mixed result. Yet at the end of one session, a visitor whose lamp could not be repaired said she had learned to recognise a damaged cord. Others said they had met neighbours who were willing to lend them tools.',
+      'The library plans to keep the café open, although the organisers know that it cannot replace professional repair services. They are considering an evening session because several people with weekend jobs asked for another time. To find out whether the project has a lasting effect, they will contact willing visitors a few months after their visit.'
+    ],
+    questions: [
+      ['Inference', 'Why are visitors encouraged to help with repairs?', ['The library needs visitors to supervise volunteers.', 'Taking part may make visitors more willing to try repairs later.', 'Taking part is required to borrow books.', 'Volunteers only repair objects they own.'], 1, 'The first paragraph says the organisers hope visitors will gain the confidence to fix other things at home.'],
+      ['Author’s stance', 'How does the author present the café’s early results?', ['As a complete failure.', 'As proof that professionals are unnecessary.', 'As promising, with benefits the repair rate alone misses.', 'As impossible to assess in any way.'], 2, 'The author gives the repair rate alongside other outcomes, including learning skills and meeting neighbours.'],
+      ['Critical thinking', 'Which measure best addresses the organisers’ question about lasting effects?', ['How many jackets arrive on the first morning.', 'The number of volunteers on the mailing list.', 'The cost of replacing the meeting-room lights.', 'How often visitors attempt repairs in the months after attending.'], 3, 'Attempts to repair things in the following months show whether the visit changed what people do at home.'],
+      ['Reading for detail', 'Why might the library add an evening session?', ['Some people work on Saturdays.', 'The library plans to stop lending tools.', 'The volunteers want to repair larger appliances.', 'Visitors say the room gets too hot in the morning.'], 0, 'The third paragraph says people with weekend jobs asked for another time.']
+    ]
+  },
+  {
+    id: 'shade', level: 'B2', topic: 'Cities and climate', title: 'Who Gets the Shade?',
+    summary: 'Where a city plants its trees can determine who benefits from the shade.',
+    paragraphs: [
+      'A city council announced that it would plant two thousand trees. At first, it planned to divide the trees equally between districts. A youth group suggested a different approach. Its members measured afternoon temperatures along routes that students used to walk home. They found that streets with little shade were common near apartment buildings and bus stops.',
+      'The group asked the council to give priority to routes where many people walked and there were few existing trees. Some residents worried that this plan would overlook quieter streets. The group responded that a few benches near shaded routes could help residents who needed to stop and rest. It also asked the council to mark which streets would be considered in later years.',
+      'Counting newly planted trees is easy, but young trees may take years to provide much shade. The council agreed to track how many trees survived, how much shade they produced and whether people actually used the cooler routes. It also decided to offer temporary shade at several busy stops during the wait.'
+    ],
+    questions: [
+      ['Inference', 'What does the group’s proposal imply about equal numbers of trees per district?', ['Equal numbers may leave the hottest and busiest routes underserved.', 'Equal numbers are illegal when bus stops are involved.', 'Equal numbers would eliminate shade around apartments.', 'Equal numbers make it impossible to measure temperatures.'], 0, 'An equal split may give too little help to busy routes with few existing trees.'],
+      ['Author’s stance', 'What view is suggested by the final paragraph?', ['Temporary shade makes planting unnecessary.', 'Tree survival is entirely outside the council’s control.', 'Walking routes should only be measured in winter.', 'Success should be judged by the shade people actually gain.'], 3, 'The final paragraph looks beyond planting totals to tree survival, the shade provided, and whether people use the cooler routes.'],
+      ['Critical thinking', 'Which additional check best tests whether the plan helps bus passengers?', ['Counting bus stops that appear on a city map.', 'Comparing heat exposure during actual waiting times before and after the changes.', 'Asking drivers to rank the appearance of the new trees.', 'Counting residents who can name a native tree.'], 1, 'Measuring heat during actual waits shows whether passengers are exposed to less heat after the changes.'],
+      ['Reading for detail', 'Why will several stops receive temporary shade?', ['The council moved the trees to quieter streets.', 'Students are forbidden to walk there in summer.', 'Young trees take time to produce useful shade.', 'Benches make trees grow more slowly.'], 2, 'The third paragraph explains that young trees may take years to provide useful shade.']
+    ]
+  },
+  {
+    id: 'metrics', level: 'C1', topic: 'Technology and research', title: 'When a Metric Becomes a Target',
+    summary: 'Does a faster reply mean a problem gets resolved sooner?',
+    paragraphs: [
+      'A university introduced a dashboard that reported the average time its help desk took to respond to requests. Administrators hoped that greater visibility would make delays harder to ignore. Within a term, the average had fallen sharply, and the dashboard was cited as evidence that students were receiving better support.',
+      'The improvement, however, coincided with a change in how staff handled tickets. They began sending brief acknowledgements almost immediately, even when a request required several days of investigation. The dashboard recorded the acknowledgement as a response. The figure was accurate on its own terms, yet it could no longer stand in for the experience the administrators cared about.',
+      'Abandoning measurement would sacrifice a useful way to detect bottlenecks. A more defensible response would pair first-response time with time to resolution and the rate of reopened tickets. Even this broader set should be interpreted alongside a sample of cases. The objective is to preserve the distinction between a convenient indicator and the quality it is supposed to represent.'
+    ],
+    questions: [
+      ['Inference', 'Why does the author say the figure was “accurate on its own terms”?', ['The original tickets had all been lost.', 'The calculation reflected the recorded definition of response.', 'The dashboard measured resolution time for every case.', 'The administrators deliberately falsified the reports.'], 1, 'The dashboard correctly counted the first acknowledgement as a response. It did not measure when the problem was resolved.'],
+      ['Author’s stance', 'Which position best captures the author’s recommendation?', ['Use a leading indicator once and discard it permanently.', 'Judge support exclusively through student testimonials.', 'Keep metrics, but check them against other measures and cases.', 'Replace all numerical measures with one stricter benchmark.'], 2, 'The final paragraph recommends keeping the measure alongside other indicators and checking it against a sample of cases.'],
+      ['Critical thinking', 'Which finding would most directly challenge the claim that students received better support?', ['The university added another field to the dashboard.', 'The new acknowledgement uses a standard greeting.', 'More staff know how to locate the dashboard.', 'Comparable tickets took longer to resolve and were reopened more often.'], 3, 'If comparable cases take longer to resolve and are reopened more often, the evidence weakens the claim that support improved.'],
+      ['Argument structure', 'What role does the second paragraph play?', ['It explains a change in practice that weakens the initial interpretation.', 'It provides the final recommendation for collecting more data.', 'It denies that the reported average actually changed.', 'It argues that acknowledgements should be prohibited.'], 0, 'The second paragraph describes the new acknowledgement practice. It explains how response times could fall even if support stayed the same.']
+    ]
+  },
+  {
+    id: 'archive', level: 'C1', topic: 'Culture and history', title: 'The Archive and Its Silences',
+    summary: 'Digital archives make records easier to access and shape which stories readers are likely to find.',
+    paragraphs: [
+      'Digitisation is often described as a way to democratise access to historical material. This description is persuasive. A student who cannot travel to an archive can now examine documents from home. Yet the apparent openness of a digital collection can disguise the decisions that shaped it long before any image appeared online.',
+      'Collections tend to preserve records produced by institutions that had the resources to organise and retain paperwork. Moreover, digitisation projects may prioritise documents that are undamaged or easy to scan. A researcher relying solely on a searchable interface may thus mistake what happens to be available for what was historically typical. The online index may amplify an imbalance inherited from the physical archive.',
+      'Some institutions have begun publishing notes about omissions, including which collections were excluded and why. Such notes do not recover the missing voices. They do, however, help researchers recognise the limits of the record and ask where else evidence might be found. An archive becomes more usable when its gaps are visible, even if those gaps cannot yet be closed.'
+    ],
+    questions: [
+      ['Inference', 'How can a search interface amplify an existing imbalance?', ['It makes preserved, scannable records especially easy to find and reuse.', 'It removes all documents produced by large institutions.', 'It stores every physical record automatically.', 'It makes damaged records more reliable than intact records.'], 0, 'Researchers are more likely to reuse records they can find easily, which can deepen an imbalance already present in the archive.'],
+      ['Author’s stance', 'How does the author regard the publication of notes about omissions?', ['As an ideal replacement for primary evidence.', 'As proof that archives are no longer selective.', 'As unnecessary once the site is freely available.', 'As valuable for interpretation, even though it cannot restore missing material.'], 3, 'The final paragraph explains that these notes reveal gaps and help researchers interpret the available records.'],
+      ['Critical thinking', 'Which practice best responds to the problem raised in the passage?', ['Counting search results as a direct estimate of historical opinion.', 'Comparing the online collection with local oral histories and the archive’s selection notes.', 'Discarding all documents from any institution that kept formal records.', 'Using only the first page of results for consistency.'], 1, 'Oral histories offer another source of evidence, and the selection notes show which material the digital collection leaves out.'],
+      ['Argument structure', 'Why does the author mention a student who cannot travel?', ['To explain why scanning damage occurs.', 'To claim that physical archives no longer matter.', 'To acknowledge a genuine benefit before examining the limitations.', 'To show that students tend to misread documents.'], 2, 'The example establishes a real benefit of digitisation before the author examines how records are selected.']
+    ]
+  }
+];
