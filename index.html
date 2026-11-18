@@ -21,9 +21,14 @@
         <a href="#reading" data-tab="reading">Reading</a>
         <a href="#quiz" data-tab="quiz">Quizzes</a>
       </nav>
-      <label class="level"><span>Study level</span><select id="level" aria-label="Study level">
+      <div class="header-controls">
+      <label class="level"><span id="level-label">Study level</span><select id="level">
         <option value="B1">B1</option><option value="B2">B2</option><option value="C1">C1</option><option value="C2">C2</option>
       </select></label>
+      <label class="level"><span class="sr-only" id="language-label">Language</span><select id="language">
+        <option value="en" lang="en">English</option><option value="zh-Hant" lang="zh-Hant">繁體中文</option>
+      </select></label>
+      </div>
     </div>
   </header>
   <main class="shell" id="app"></main>
