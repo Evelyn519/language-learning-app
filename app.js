@@ -4,7 +4,7 @@ const app = document.querySelector('#app');
 const levelSelect = document.querySelector('#level');
 const languageSelect = document.querySelector('#language');
 const status = document.querySelector('#status');
-const levels = ['B1', 'B2', 'C1', 'C2'];
+const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 const words = Object.entries(window.wordLevels);
 const readings = window.readings;
 const perPage = 12;
@@ -61,15 +61,29 @@ let level = levels.includes(saved.level) ? saved.level : 'B2';
 const mastered = new Set(Array.isArray(saved.mastered)
   ? saved.mastered.filter(word => Object.hasOwn(window.wordLevels, word)) : []);
 let latest = saved.latest || null;
-let filter = 'academic';
+let filter = defaultWordFilter();
 let search = '';
-let onlyLevel = false;
+let onlyLevel = isBeginner();
 let page = 0;
 let activeReading = null;
 let quiz = null;
 let currentView = '';
 const warmupAnswers = new Map();
 const warmups = {
+  A1: {
+    text: 'Ben has a dog. Its name is Max. On Sunday, Ben and Max go to the park.',
+    question: 'Where do Ben and Max go on Sunday?',
+    options: ['To school.', 'To the park.', 'To the shop.'],
+    answer: 1,
+    explanation: ['The last sentence says they go to the park.', '最後一句說他們去公園。']
+  },
+  A2: {
+    text: 'Emma usually walks to work. This morning it was raining, so she took the bus. She got to work ten minutes earlier than usual.',
+    question: 'Why did Emma take the bus this morning?',
+    options: ['She had a new job.', 'Her bus was early.', 'It was raining.'],
+    answer: 2,
+    explanation: ['The passage gives the rain as the reason she took the bus.', '文章說，下雨是她今天搭公車的原因。']
+  },
   B2: {
     text: 'A bakery began selling unsold bread in mixed bags at the end of the day. Customers could not choose what went into each bag, but the bags cost less than buying the bread separately. After a month, the bakery was throwing away much less bread.',
     question: 'What can you infer about customers who bought the mixed bags?',
@@ -109,7 +123,7 @@ function home() {
   return `<section class="hero">
     <div><span class="eyebrow">${t("ENGLISH STUDY CLUB", "英語學習")}</span>
       <h1 tabindex="-1">${t("Make English<br>a daily habit.", "讓英語成為<br>每天的習慣。")}</h1>
-      <p>${t("Start with academic vocabulary, read a short passage, and test your understanding.", "從學術單字開始，讀一篇英文短文，再用進階測驗檢查理解。")}</p>
+      <p>${t("Practise vocabulary, read a short passage, and test your understanding.", "練習單字、讀一篇英文短文，再做測驗檢查理解。")}</p>
       <a class="button primary" href="#words" data-action="start-words">${t("Start learning", "開始學習")} <span aria-hidden="true">→</span></a>
     </div>
     <div class="art" aria-hidden="true"><div class="art-card"><span class="eyebrow">${t("ACADEMIC WORD", "學術單字")}</span>
@@ -120,8 +134,8 @@ function home() {
   <div class="section-heading"><h2>${t("Choose a practice activity", "選擇練習")}</h2><span class="pill">${t("Your level", "目前程度")} ${level}</span></div>
   <div class="cards">
     <a class="card" href="#words"><span class="card-icon" aria-hidden="true">Aa</span><h3>${t("Vocabulary practice", "單字練習")}</h3><p>${t("Find words, listen to pronunciations, and keep track of the words you know.", "搜尋、聽發音，累積你已掌握的單字。")}</p></a>
-    <a class="card" href="#reading"><span class="card-icon" aria-hidden="true">▤</span><h3>${t("Short readings", "短文閱讀")}</h3><p>${t("Read short B2–C1 passages and identify their main arguments.", "探索 B2–C1 英文短文，練習掌握論點。")}</p></a>
-    <a class="card" href="#quiz"><span class="card-icon" aria-hidden="true">✓</span><h3>${t("Advanced quizzes", "進階測驗")}</h3><p>${t("Draw inferences, identify the author’s stance, and evaluate evidence.", "練習推論、辨識作者立場與評估證據。")}</p></a>
+    <a class="card" href="#reading"><span class="card-icon" aria-hidden="true">▤</span><h3>${t("Short readings", "短文閱讀")}</h3><p>${t("Read short A1–C1 passages and check your understanding.", "探索 A1–C1 英文短文，練習閱讀理解。")}</p></a>
+    <a class="card" href="#quiz"><span class="card-icon" aria-hidden="true">✓</span><h3>${t("Reading quizzes", "閱讀測驗")}</h3><p>${t("Practise finding details, drawing inferences, and evaluating evidence.", "練習找細節、做推論和評估證據。")}</p></a>
   </div>
   <div class="stats" aria-label="${t("Learning statistics", "學習統計")}">
     <div class="stat"><strong>7,000</strong>${t("English words", "英文單字")}</div>
@@ -135,7 +149,10 @@ function homeReadingPractice() {
   const band = recommendedReadingLevel();
   const warmup = warmups[band];
   const selection = warmupAnswers.get(band);
-  const featured = readings.slice(-2).sort((a, b) => Number(b.level === band) - Number(a.level === band));
+  const companion = {A1: 'A2', A2: 'A1', B2: 'C1', C1: 'B2'};
+  const featured = [band, companion[band]].map(
+    readingLevel => readings.findLast(article => article.level === readingLevel)
+  );
   return `
   <section aria-labelledby="featured-heading">
     <div class="section-heading">
@@ -185,7 +202,7 @@ function homeReadingPractice() {
 }
 
 function vocabulary() {
-  return heading(t('VOCABULARY', '單字'), t("Vocabulary practice", "單字練習"), t("Start with priority academic words. Filter by level or search the full library.", "預設先練學術重點字。你可以依程度篩選，或直接搜尋全部單字。")) + `
+  return heading(t('VOCABULARY', '單字'), t("Vocabulary practice", "單字練習"), isBeginner() ? t("Start with everyday words at your level. Turn off the level filter to search the full library.", "從符合你程度的生活單字開始。取消程度篩選後，就能搜尋全部單字。") : t("Practise academic words or filter the full library by level.", "練習學術重點字，或依程度篩選完整單字庫。")) + `
     <div class="toolbar">
       <label class="sr-only" for="search">${t("Search vocabulary", "搜尋單字")}</label>
       <input id="search" type="search" placeholder="${t("Search for a word, e.g. evidence", "搜尋英文單字，例如 evidence")}" value="${escapeHtml(search)}">
@@ -242,8 +259,17 @@ function renderWords() {
     <button data-action="page" data-key="1" ${page + 1 >= totalPages ? 'disabled' : ''}>${t("Next page", "下一頁")}</button>` : '';
 }
 
+function isBeginner() {
+  return level === 'A1' || level === 'A2';
+}
+
+function defaultWordFilter() {
+  return level === 'B2' || level === 'C1' ? 'academic' : 'all';
+}
+
 function recommendedReadingLevel() {
-  return levels.indexOf(level) < 2 ? 'B2' : 'C1';
+  if (isBeginner()) return level;
+  return level === 'B1' || level === 'B2' ? 'B2' : 'C1';
 }
 
 function preferredReadings() {
@@ -267,7 +293,7 @@ function passage(article, includeAction) {
 function reading(linkedArticle) {
   const list = preferredReadings();
   const article = linkedArticle || list.find(item => item.id === activeReading) || list[0];
-  return heading(t('READING', '閱讀'), t("Short readings", "短文閱讀"), t("Choose a B2 or C1 passage and practise interpreting its ideas and arguments.", "選一篇 B2 或 C1 短文，讀完後練習理解和分析。")) +
+  return heading(t('READING', '閱讀'), t("Short readings", "短文閱讀"), t("Choose a passage from A1 to C1. Read it, then take a quiz.", "選一篇 A1 至 C1 的短文，讀完後做測驗。")) +
     `<div class="read-layout"><div class="read-list" aria-label="${t("Choose a passage", "選擇文章")}">
     ${list.map(item => `<button data-action="read" data-key="${item.id}" aria-pressed="${item === article}">
       <span class="pill">${item.level}</span> <strong lang="en">${item.title}</strong>
@@ -276,7 +302,7 @@ function reading(linkedArticle) {
 }
 
 function quizList() {
-  return heading(t('ASSESSMENT', '測驗'),t("Advanced quizzes", "進階測驗"),t("Each quiz has four questions on skills such as inference, author’s stance, and critical thinking. Submit to review each answer.", "每篇 4 題，包含推論、作者立場與批判思考。交卷後即可查看逐題解析。")) +
+  return heading(t('ASSESSMENT', '測驗'),t("Reading quizzes", "閱讀測驗"),t("Each quiz has four questions. Beginner quizzes focus on understanding details. Advanced quizzes ask you to analyse the text. Submit to see the explanations.", "每篇 4 題。初階測驗著重理解細節，進階測驗著重分析文章。交卷後可查看解析。")) +
     `<div class="cards">${preferredReadings().map(article => `
     <a class="card" href="#quiz/${article.id}">
       <span class="pill">${article.level}</span><h3 lang="en">${article.title}</h3>
@@ -381,6 +407,7 @@ languageSelect.addEventListener('change', () => {
 levelSelect.value = level;
 levelSelect.addEventListener('change', () => {
   level = levelSelect.value;
+  if (filter !== 'mastered') filter = defaultWordFilter();
   page = 0;
   onlyLevel = true;
   activeReading = null;
@@ -442,7 +469,8 @@ app.addEventListener('click', event => {
   if (!control) return;
   const {action, key} = control.dataset;
   if (action === 'start-words') {
-    filter = 'academic';
+    filter = defaultWordFilter();
+    onlyLevel = isBeginner();
     search = '';
     page = 0;
   }

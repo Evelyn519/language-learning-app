@@ -184,5 +184,71 @@ window.readings = [
         '末段說明訪談能揭露參與的障礙，也交代這些資料無法判斷全市的看法。'
       ]
     }
+  },
+  {
+    id: 'a1-lunch',
+    level: 'A1',
+    topic: 'School and daily life',
+    title: 'Lunch with Sofia',
+    summary: 'Maya and Sofia have lunch at school.',
+    paragraphs: [
+      'Maya goes to school at eight. She has lunch at twelve. She sits with her friend Sofia.',
+      'Maya has a sandwich and an apple. Sofia has rice and a banana. They both drink water.',
+      'After lunch, they go outside. It is sunny. They play with a ball.'
+    ],
+    questions: [
+      ['Reading for detail', 'What time does Maya have lunch?', ['At eight.', 'At ten.', 'At twelve.', 'At two.'], 2, 'The first paragraph says Maya has lunch at twelve.'],
+      ['Reading for detail', 'Who sits with Maya?', ['Her brother.', 'Her teacher.', 'Her mother.', 'Her friend Sofia.'], 3, 'Maya sits with her friend Sofia.'],
+      ['Reading for detail', 'What do both friends drink?', ['Water.', 'Milk.', 'Juice.', 'Tea.'], 0, 'The second paragraph says they both drink water.'],
+      ['Reading for detail', 'What do they do after lunch?', ['They read a book.', 'They play with a ball.', 'They go home.', 'They eat an apple.'], 1, 'They go outside and play with a ball.']
+    ],
+    zh: {
+      topic: '學校與日常生活',
+      summary: '瑪雅和蘇菲亞在學校一起吃午餐。',
+      paragraphs: [
+        '瑪雅八點去上學，十二點吃午餐。她和朋友蘇菲亞坐在一起。',
+        '瑪雅吃三明治和蘋果。蘇菲亞吃飯和香蕉。她們都喝水。',
+        '午餐後，她們到外面去。天氣晴朗，她們一起玩球。'
+      ],
+      explanations: [
+        '第一段說瑪雅十二點吃午餐。',
+        '瑪雅和朋友蘇菲亞坐在一起。',
+        '第二段說她們都喝水。',
+        '她們到外面一起玩球。'
+      ]
+    }
+  },
+  {
+    id: 'a2-market',
+    level: 'A2',
+    topic: 'Shopping and plans',
+    title: 'A Change of Plans',
+    summary: 'Leo and his sister find another way to make dinner.',
+    paragraphs: [
+      'On Saturday morning, Leo and his sister Nina went to the market. They wanted to make tomato soup for dinner. When they got there, the shop that sold tomatoes was closed.',
+      'Nina suggested buying carrots instead. Leo was not sure because he had never made carrot soup before. The woman at the vegetable stall told them to cook the carrots with an onion and some water.',
+      'At home, they followed her advice. They made enough soup for four people and shared it with their neighbours. Leo liked the soup so much that he wrote down the recipe.'
+    ],
+    questions: [
+      ['Reading for detail', 'Why did they change their dinner plan?', ['The tomato shop was closed.', 'Nina did not like tomatoes.', 'The market had no carrots.', 'They had dinner at a restaurant.'], 0, 'They wanted tomatoes, but the shop that sold them was closed.'],
+      ['Reading for detail', 'Who gave them advice about making the soup?', ['A neighbour.', 'A friend from school.', 'The woman at the vegetable stall.', 'Leo’s sister.'], 2, 'The woman at the stall told them what to cook with the carrots.'],
+      ['Inference', 'Why did Leo write down the recipe?', ['He wanted to sell it.', 'He probably wanted to make the soup again.', 'He needed to find the market.', 'The neighbours asked for a shopping list.'], 1, 'Leo liked the result, so keeping the recipe would help him make the soup again.'],
+      ['Reading for detail', 'Who ate some of the soup with them?', ['Their teacher.', 'The shop owner.', 'Their cousins.', 'Their neighbours.'], 3, 'They made enough for four people and shared it with their neighbours.']
+    ],
+    zh: {
+      topic: '購物與計畫',
+      summary: '里奧和姊姊改用另一種方法準備晚餐。',
+      paragraphs: [
+        '星期六早上，里奧和姊姊妮娜去市場。他們想煮番茄湯當晚餐。到了市場，賣番茄的店卻沒開。',
+        '妮娜建議改買紅蘿蔔。里奧有點猶豫，因為他從來沒煮過紅蘿蔔湯。菜攤的女士教他們用洋蔥和水一起煮紅蘿蔔。',
+        '回家後，他們照著她的建議煮湯。他們煮了四人份，和鄰居一起分享。里奧很喜歡這道湯，就把食譜記了下來。'
+      ],
+      explanations: [
+        '他們本來想買番茄，但賣番茄的店沒開。',
+        '菜攤的女士告訴他們要用什麼和紅蘿蔔一起煮。',
+        '里奧很喜歡這道湯，記下食譜可以方便下次再煮。',
+        '他們煮了四人份，和鄰居一起分享。'
+      ]
+    }
   }
 ];
