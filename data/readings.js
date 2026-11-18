@@ -118,5 +118,71 @@ window.readings = [
         "開頭先肯定數位化改善可及性，再引出對資料選取過程的分析。"
       ]
     }
+  },
+  {
+    id: 'library-of-things',
+    level: 'B2',
+    topic: 'Sharing and access',
+    title: 'A Library of Useful Things',
+    summary: 'A lending project helps people borrow tools they rarely need to own.',
+    paragraphs: [
+      'When a neighbourhood library began lending tools, its staff expected drills to be the most popular items. Instead, residents borrowed sewing machines more often. Many wanted to mend a garment once or twice a year and had no reason to buy a machine. Borrowing one also gave beginners a chance to see whether they enjoyed sewing before spending money on equipment.',
+      'The scheme was popular, but the library soon found that reservations were uneven. People who could collect equipment during working hours had an advantage. To make borrowing easier for people with less flexible schedules, the library added Saturday collection and kept some items available for walk-in visitors.',
+      'The staff now track who borrows equipment for the first time as well as how often each item is used. A machine that is checked out every week may look like a success, but that total reveals little about how many households got a turn. The library will use both measures when deciding what to buy next.'
+    ],
+    questions: [
+      ['Inference', 'What made the sewing machines attractive to beginners?', ['The machines could be kept permanently.', 'Borrowing let them try sewing before buying equipment.', 'The library required members to learn sewing.', 'Repairs were done by library staff.'], 1, 'The first paragraph says beginners could find out whether they liked sewing before spending money on a machine.'],
+      ['Author’s stance', 'How does the author present the lending scheme?', ['As popular and worth adjusting to improve access.', 'As a temporary project with no benefits.', 'As useful only for people working from home.', 'As evidence that the library should stop lending books.'], 0, 'The passage describes demand and explains how the library responded when some residents found it harder to collect equipment.'],
+      ['Critical thinking', 'Which evidence would best show whether Saturday collection improved access?', ['The price of the sewing machines.', 'Which brand of drill was borrowed most often.', 'How many reservations library staff made.', 'Whether more people unable to come on weekdays borrowed equipment after the change.'], 3, 'That comparison measures borrowing among the people the new pickup time was intended to help.'],
+      ['Reading for detail', 'What does the library track as well as each item’s usage?', ['The total number of repairs completed.', 'Which households buy a machine later.', 'Who borrows equipment for the first time.', 'How long borrowers have lived nearby.'], 2, 'The final paragraph says staff track first-time borrowers as well as how often each item is used.']
+    ],
+    zh: {
+      topic: '共享與使用機會',
+      summary: '圖書館借出工具，讓居民能使用平常很少需要購買的設備。',
+      paragraphs: [
+        '社區圖書館開始出借工具時，館員原以為電鑽最受歡迎，結果居民更常借縫紉機。許多人一年只需要補一兩次衣服，沒有理由自己買一台。初學者也能先借用，確定自己是否喜歡縫紉，再決定要不要買設備。',
+        '這項計畫很受歡迎，但館方很快發現，居民的預約機會並不平均。能在工作時間領取設備的人更有利。為了方便時間較不彈性的人，館方開放週六領取，並保留部分設備給直接到館的居民。',
+        '館員現在除了記錄每件設備的借用次數，也記錄誰是第一次借用。一台機器每週都借出去，看起來很成功，但單靠次數很難知道有多少戶人家真正借到。館方會參考這兩項資料，決定接下來要添購什麼。'
+      ],
+      explanations: [
+        '第一段提到，初學者可以先試試自己是否喜歡縫紉，再決定要不要購買設備。',
+        '文章描述這項計畫很受歡迎，也說明館方發現有些居民難以領取設備後，如何調整借用方式。',
+        '這項比較能看到原本無法在平日領取的人，是否因新增週六時段而更容易借到設備。',
+        '最後一段指出，館員除了追蹤設備的借用次數，也記錄第一次借用的人。'
+      ]
+    }
+  },
+  {
+    id: 'quiet-consultation',
+    level: 'C1',
+    topic: 'Public participation',
+    title: 'When Silence Looks Like Agreement',
+    summary: 'A transport survey shows why a low complaint count can be misleading.',
+    paragraphs: [
+      'A transit agency proposed cancelling an early bus and directed passengers to an online consultation. Few respondents objected, and a planning memo described the proposal as broadly accepted. Yet the respondents were whoever had seen the invitation and found time to reply. The agency had little evidence about passengers who would lose their only practical way to reach work.',
+      'A community group interviewed passengers on the early bus. Several had missed the invitation, which was displayed inside the main station rather than at the stops they used. Others knew about the survey but felt that objecting would make little difference. The interviews exposed two different barriers: finding out about the consultation and believing that a response was worth the effort.',
+      'The interviews do not establish how much opposition exists across the city. They do, however, help the agency decide what to measure next. If the question is who would be most affected, surveying passengers on the routes and at the times in question is more informative than relying on a general invitation alone.'
+    ],
+    questions: [
+      ['Inference', 'What assumption underlies the planning memo’s conclusion?', ['The earliest bus carried fewer people than estimated.', 'Every respondent depended on the early bus.', 'Few objections among respondents reflect broad acceptance among passengers.', 'The community group had already interviewed some passengers.'], 2, 'The memo treats a low objection rate among people who replied as evidence about passengers more broadly.'],
+      ['Author’s stance', 'What does the author see as the main value of the interviews?', ['They exposed participation barriers that can guide better evidence collection.', 'They proved a majority of city residents opposed the cancellation.', 'They established that written surveys should be abandoned.', 'They showed the route should be removed immediately.'], 0, 'The interviews identify why affected riders might not have responded and help the agency improve its next round of research.'],
+      ['Critical thinking', 'Which follow-up would most directly reveal who depends on the early bus?', ['Post the same survey for one more month.', 'Ask city employees where they see the consultation notices.', 'Compare the cost of printing notices across stations.', 'Interview a sample of riders on early buses about their travel alternatives.'], 3, 'Sampling riders directly and asking about alternatives targets the people and travel needs relevant to the proposed change.'],
+      ['Argument structure', 'Why does the last paragraph acknowledge what the interviews cannot establish?', ['To argue that passenger interviews have no purpose.', 'To distinguish the limits of the evidence from its practical value.', 'To retract the findings reported in the preceding paragraph.', 'To introduce evidence that more respondents support the plan.'], 1, 'The paragraph separates what interviews can reveal about participation barriers from what they cannot establish about citywide opinion.']
+    ],
+    zh: {
+      topic: '公共參與',
+      summary: '一項大眾運輸調查說明，反對聲音少可能讓決策者誤判民意。',
+      paragraphs: [
+        '某運輸機構提議取消一班清晨公車，並邀請乘客參與線上意見徵詢。回覆者很少反對，於是規劃備忘錄記載，這項提案普遍獲得接受。然而，回覆的人只包括看過邀請、也抽得出時間作答的人。至於可能因此失去唯一可行通勤方式的乘客，機構掌握的資訊很少。',
+        '一個社區團體訪問了這班清晨公車的乘客。有幾個人沒看到邀請，因為公告貼在總站裡，而他們在其他站上車。也有人知道問卷，卻覺得提出反對意見不會改變結果。訪談揭露了兩個不同障礙：是否知道有意見徵詢，以及是否相信回覆值得花時間。',
+        '這些訪談無法確定全市有多少人反對，但能幫助機構決定下一步要蒐集哪些資料。如果重點是找出受影響最大的人，在相關路線和時段訪問乘客，比只發布一般邀請更能提供有用的資訊。'
+      ],
+      explanations: [
+        '備忘錄把回覆者的低反對率當成較廣泛的乘客意見。',
+        '訪談找出受影響的乘客可能沒回覆的原因，幫助機構改進下一輪蒐集資料的方式。',
+        '直接訪問清晨班次乘客並詢問其他交通選項，可以了解哪些人仰賴這班公車。',
+        '末段說明訪談能揭露參與的障礙，也交代這些資料無法判斷全市的看法。'
+      ]
+    }
   }
 ];

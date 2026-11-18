@@ -68,6 +68,23 @@ let page = 0;
 let activeReading = null;
 let quiz = null;
 let currentView = '';
+const warmupAnswers = new Map();
+const warmups = {
+  B2: {
+    text: 'A bakery began selling unsold bread in mixed bags at the end of the day. Customers could not choose what went into each bag, but the bags cost less than buying the bread separately. After a month, the bakery was throwing away much less bread.',
+    question: 'What can you infer about customers who bought the mixed bags?',
+    options: ['They needed the same kind of bread each day.', 'They accepted less choice in exchange for a lower price.', 'They paid extra to choose their bread.'],
+    answer: 1,
+    explanation: ['Customers could not choose the contents, but the bags were cheaper. The price gave them a reason to accept less choice.', '顧客不能挑選袋中的麵包，但可以用更低的價格購買，因此願意接受較少的選擇。']
+  },
+  C1: {
+    text: 'An office reported a 30% reduction in printing after it began charging for each page. In the same month, two large teams moved to another building. The report described the fee as the cause of the entire reduction.',
+    question: 'Which comparison would best test the report’s claim?',
+    options: ['Compare the prices of different printers.', 'Ask the departing teams which paper they preferred.', 'Compare printing per employee among the teams that stayed, before and after the fee.'],
+    answer: 2,
+    explanation: ['Looking at the same teams over time helps separate a change in printing habits from the effect of having fewer people in the office.', '前後比較同一批員工的人均列印量，有助於區分列印習慣的改變，以及辦公室人數減少的影響。']
+  }
+};
 
 function saveProgress() {
   try {
@@ -99,6 +116,7 @@ function home() {
       <strong>evidence</strong><small>noun · ${t("support for a claim", "證據")}</small></div>
       <div class="art-card secondary"><strong>draw a conclusion</strong><small>${t("reach a judgment based on evidence", "從線索得出結論")}</small></div></div>
   </section>
+  ${homeReadingPractice()}
   <div class="section-heading"><h2>${t("Choose a practice activity", "選擇練習")}</h2><span class="pill">${t("Your level", "目前程度")} ${level}</span></div>
   <div class="cards">
     <a class="card" href="#words"><span class="card-icon" aria-hidden="true">Aa</span><h3>${t("Vocabulary practice", "單字練習")}</h3><p>${t("Find words, listen to pronunciations, and keep track of the words you know.", "搜尋、聽發音，累積你已掌握的單字。")}</p></a>
@@ -111,6 +129,59 @@ function home() {
     <div class="stat"><strong>${mastered.size.toLocaleString()}</strong>${t("Mastered", "已掌握")}</div>
   </div>
   ${latest ? `<div class="section-heading"><h2>${t("Latest quiz", "最近一次測驗")}</h2><a href="#results">${t("View score", "查看分數")} →</a></div>` : ''}`;
+}
+
+function homeReadingPractice() {
+  const band = recommendedReadingLevel();
+  const warmup = warmups[band];
+  const selection = warmupAnswers.get(band);
+  const featured = readings.slice(-2).sort((a, b) => Number(b.level === band) - Number(a.level === band));
+  return `
+  <section aria-labelledby="featured-heading">
+    <div class="section-heading">
+      <h2 id="featured-heading">${t('Featured readings', '推薦短文')}</h2>
+      <a href="#reading">${t('All readings', '查看全部短文')} →</a>
+    </div>
+    <div class="featured-grid">
+      ${featured.map(article => `
+        <article class="panel featured-reading">
+          <div class="pills"><span class="pill">${article.level}</span><span class="pill academic">${t(article.topic, article.zh.topic)}</span></div>
+          <h3 lang="en">${article.title}</h3>
+          <p class="muted">${t(article.summary, article.zh.summary)}</p>
+          <div class="actions">
+            <a class="button" href="#reading/${article.id}" aria-label="${t('Read', '閱讀')} · ${article.title}">${t('Read passage', '閱讀短文')} →</a>
+            <a class="button" href="#quiz/${article.id}" aria-label="${t('Take quiz', '開始測驗')} · ${article.title}">${t('Take quiz', '開始測驗')}</a>
+          </div>
+        </article>`).join('')}
+    </div>
+  </section>
+  <section aria-labelledby="warmup-heading">
+    <div class="section-heading">
+      <h2 id="warmup-heading">${t('Quick reading practice', '快速閱讀練習')}</h2>
+      <span class="pill">${band} · ${t('1 question', '1 題')}</span>
+    </div>
+    <div class="panel warmup">
+      <div class="warmup-passage">
+        <p class="eyebrow">${t('Read the passage', '閱讀短文')}</p>
+        <p lang="en">${warmup.text}</p>
+      </div>
+      <form id="warmup-form">
+        <fieldset ${selection === undefined ? '' : 'disabled'}>
+          <legend lang="en">${warmup.question}</legend>
+          ${warmup.options.map((option, i) => `<label class="option" lang="en">
+            <input type="radio" name="warmup-answer" value="${i}" required ${selection === i ? 'checked' : ''}>
+            <span>${option}</span></label>`).join('')}
+        </fieldset>
+        ${selection === undefined
+          ? `<button class="primary" type="submit">${t('Check answer', '檢查答案')}</button>`
+          : `<div id="warmup-feedback" tabindex="-1">
+              <p class="${selection === warmup.answer ? 'correct' : 'incorrect'}">${selection === warmup.answer ? t('Correct', '答對了') : t('Incorrect', '答錯了')}</p>
+              <p class="muted">${t(...warmup.explanation)}</p>
+            </div>
+            <button type="button" data-action="retry-warmup">${t('Try again', '再試一次')}</button>`}
+      </form>
+    </div>
+  </section>`;
 }
 
 function vocabulary() {
@@ -171,8 +242,12 @@ function renderWords() {
     <button data-action="page" data-key="1" ${page + 1 >= totalPages ? 'disabled' : ''}>${t("Next page", "下一頁")}</button>` : '';
 }
 
+function recommendedReadingLevel() {
+  return levels.indexOf(level) < 2 ? 'B2' : 'C1';
+}
+
 function preferredReadings() {
-  const preferred = levels.indexOf(level) < 2 ? 'B2' : 'C1';
+  const preferred = recommendedReadingLevel();
   return [...readings].sort((a,b) => Number(b.level === preferred) - Number(a.level === preferred));
 }
 
@@ -189,9 +264,9 @@ function passage(article, includeAction) {
   </article>`;
 }
 
-function reading() {
+function reading(linkedArticle) {
   const list = preferredReadings();
-  const article = list.find(item => item.id === activeReading) || list[0];
+  const article = linkedArticle || list.find(item => item.id === activeReading) || list[0];
   return heading(t('READING', '閱讀'), t("Short readings", "短文閱讀"), t("Choose a B2 or C1 passage and practise interpreting its ideas and arguments.", "選一篇 B2 或 C1 短文，讀完後練習理解和分析。")) +
     `<div class="read-layout"><div class="read-list" aria-label="${t("Choose a passage", "選擇文章")}">
     ${list.map(item => `<button data-action="read" data-key="${item.id}" aria-pressed="${item === article}">
@@ -277,7 +352,7 @@ function route(focus = false) {
   const [view, id] = (location.hash.slice(1) || 'home').split('/');
   const article = readings.find(item => item.id === id);
   const views = {
-    home, words: vocabulary, reading, quiz: article ? () => quizView(article) : quizList,
+    home, words: vocabulary, reading: () => reading(article), quiz: article ? () => quizView(article) : quizList,
     results, credits
   };
   currentView = Object.hasOwn(views, view) ? view : 'home';
@@ -338,6 +413,15 @@ function focusQuestion() {
 }
 
 app.addEventListener('submit', event => {
+  if (event.target.id === 'warmup-form') {
+    event.preventDefault();
+    const choice = new FormData(event.target).get('warmup-answer');
+    if (choice === null) return;
+    warmupAnswers.set(recommendedReadingLevel(), Number(choice));
+    route();
+    document.querySelector('#warmup-feedback').focus({preventScroll: true});
+    return;
+  }
   if (event.target.id !== 'quiz-form') return;
   event.preventDefault();
   if (quiz.answers[quiz.index] === null) return;
@@ -406,8 +490,14 @@ app.addEventListener('click', event => {
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
   }
+  if (action === 'retry-warmup') {
+    warmupAnswers.delete(recommendedReadingLevel());
+    route();
+    document.querySelector('#warmup-form input').focus({preventScroll: true});
+  }
   if (action === 'read') {
     activeReading = key;
+    if (location.hash.startsWith('#reading/')) history.replaceState(null, '', `#reading/${key}`);
     route();
     document.querySelector(`[data-action=read][data-key="${key}"]`)?.focus();
   }

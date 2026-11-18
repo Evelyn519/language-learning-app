@@ -120,3 +120,14 @@ legend{font-weight:750;font-size:1.1rem;line-height:1.4;margin-bottom:12px}
 .article summary{cursor:pointer;color:var(--accent);font-weight:720}
 [lang="zh-Hant"]{font-family:Inter,system-ui,"Noto Sans TC",sans-serif}
 @media(max-width:520px){.header-controls #level-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}}
+
+.featured-grid,.warmup{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.featured-reading{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.featured-reading .pills{margin-bottom:0}
+.featured-reading .actions{margin-top:auto;padding-top:6px}
+.warmup{gap:24px}
+.warmup-passage{background:var(--accent-soft);border-radius:12px;padding:18px;align-self:start}
+.warmup-passage .eyebrow{margin-bottom:8px}
+.warmup-passage p[lang="en"]{line-height:1.8}
+#warmup-feedback{padding:10px 0}
+@media(max-width:640px){.featured-grid,.warmup{grid-template-columns:1fr}}

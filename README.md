@@ -23,7 +23,8 @@ Download or clone this repository and open `index.html` in a modern browser. The
 
 - The interface supports English and Traditional Chinese and offers B1, B2, C1 and C2 study settings. The vocabulary library contains 7,000 distinct entries, including 200 academic priority words. The selected level affects ordering and can be applied as an exact filter.
 - Vocabulary includes English definitions, examples where available, pronunciation through browser speech synthesis, and a mastered-word list. Voice availability depends on the browser and operating system.
-- Four original B2–C1 passages each have four multiple-choice questions. Every quiz covers inference, author stance and critical thinking. Submission displays a score and explanations in the selected interface language. Traditional Chinese mode also offers a collapsible translation of each passage on the reading page. Vocabulary definitions and quiz questions are in English.
+- Six original B2–C1 passages each have four multiple-choice questions. Every quiz covers inference, author stance and critical thinking. Submission displays a score and explanations in the selected interface language. Traditional Chinese mode also offers a collapsible translation of each passage on the reading page. Vocabulary definitions and quiz questions are in English.
+- The homepage features two reading recommendations and a one-question warm-up matched to the selected study level. Warm-up feedback appears immediately.
 - The selected language, level, mastered words and latest result are saved in the same browser. No sign-in or backend is required.
 
 ### Data sources
