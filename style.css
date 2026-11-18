@@ -1,4 +1,4 @@
-:root{color-scheme:light;--paper:#f8f7f2;--white:#fffefa;--ink:#192d26;--muted:#52635a;--green:#195b42;--deep:#123d30;--mint:#e3eee4;--line:#dbe1d8;--gold:#f1db9a;font-family:Inter,system-ui,"Noto Sans TC",sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
+:root{color-scheme:light;--paper:#f8f7f2;--white:#fffefa;--ink:#192d26;--muted:#52635a;--green:#195b42;--deep:#123d30;--mint:#e3eee4;--line:#dbe1d8;--gold:#f1db9a;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
 *{box-sizing:border-box}
 body{margin:0}
 a{color:inherit}
@@ -23,7 +23,7 @@ select,input{border:1px solid var(--line);background:var(--white);border-radius:
 select{font-weight:750}
 main.shell{padding:36px 0 24px;min-height:70vh}
 .hero{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;overflow:hidden;min-height:348px;gap:26px;background:var(--deep);color:#fffefa;border-radius:24px;padding:46px clamp(24px,5vw,58px)}
-.hero h1{font-family:Georgia,"Noto Serif TC",serif;margin:.18em 0 .25em}
+.hero h1{font-family:Georgia,serif;margin:.18em 0 .25em}
 .hero p{color:#e1ebe0;max-width:38ch;margin-bottom:24px}
 .eyebrow{letter-spacing:.11em;font-weight:800;font-size:.78rem;color:var(--green)}
 .hero .eyebrow{color:var(--gold)}

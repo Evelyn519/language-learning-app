@@ -34,7 +34,7 @@ function saveProgress() {
   try {
     localStorage.setItem(storageKey, JSON.stringify({level, mastered: [...mastered], latest}));
   } catch {
-    status.textContent = '目前無法在此瀏覽器保存進度。';
+    status.textContent = 'Progress could not be saved in this browser.';
   }
 }
 
@@ -52,37 +52,37 @@ function heading(category, title, subtitle) {
 function home() {
   return `<section class="hero">
     <div><span class="eyebrow">ENGLISH STUDY CLUB</span>
-      <h1 tabindex="-1">讓英語成為<br>每天的習慣。</h1>
-      <p>從學術單字開始，讀一篇英文短文，再用進階測驗檢查理解。</p>
-      <a class="button primary" href="#words" data-action="start-words">開始學習 <span aria-hidden="true">→</span></a>
+      <h1 tabindex="-1">Make English<br>a daily habit.</h1>
+      <p>Start with academic vocabulary, read a short passage, and test your understanding.</p>
+      <a class="button primary" href="#words" data-action="start-words">Start learning <span aria-hidden="true">→</span></a>
     </div>
     <div class="art" aria-hidden="true"><div class="art-card"><span class="eyebrow">ACADEMIC WORD</span>
-      <strong>evidence</strong><small>noun · 證據</small></div>
-      <div class="art-card secondary"><strong>draw a conclusion</strong><small>從線索得出結論</small></div></div>
+      <strong>evidence</strong><small>noun · support for a claim</small></div>
+      <div class="art-card secondary"><strong>draw a conclusion</strong><small>reach a judgment based on evidence</small></div></div>
   </section>
-  <div class="section-heading"><h2>選擇練習</h2><span class="pill">目前程度 ${level}</span></div>
+  <div class="section-heading"><h2>Choose a practice activity</h2><span class="pill">Your level ${level}</span></div>
   <div class="cards">
-    <a class="card" href="#words"><span class="card-icon" aria-hidden="true">Aa</span><h3>單字練習</h3><p>搜尋、聽發音，累積你已掌握的單字。</p></a>
-    <a class="card" href="#reading"><span class="card-icon" aria-hidden="true">▤</span><h3>短文閱讀</h3><p>探索 B2–C1 英文短文，練習掌握論點。</p></a>
-    <a class="card" href="#quiz"><span class="card-icon" aria-hidden="true">✓</span><h3>進階測驗</h3><p>練習推論、辨識作者立場與評估證據。</p></a>
+    <a class="card" href="#words"><span class="card-icon" aria-hidden="true">Aa</span><h3>Vocabulary practice</h3><p>Find words, listen to pronunciations, and keep track of the words you know.</p></a>
+    <a class="card" href="#reading"><span class="card-icon" aria-hidden="true">▤</span><h3>Short readings</h3><p>Read short B2–C1 passages and identify their main arguments.</p></a>
+    <a class="card" href="#quiz"><span class="card-icon" aria-hidden="true">✓</span><h3>Advanced quizzes</h3><p>Draw inferences, identify the author’s stance, and evaluate evidence.</p></a>
   </div>
-  <div class="stats" aria-label="學習統計">
-    <div class="stat"><strong>7,000</strong>英文單字</div>
-    <div class="stat"><strong>200</strong>學術重點字</div>
-    <div class="stat"><strong>${mastered.size.toLocaleString()}</strong>已掌握</div>
+  <div class="stats" aria-label="Learning statistics">
+    <div class="stat"><strong>7,000</strong>English words</div>
+    <div class="stat"><strong>200</strong>Priority academic words</div>
+    <div class="stat"><strong>${mastered.size.toLocaleString()}</strong>Mastered</div>
   </div>
-  ${latest ? '<div class="section-heading"><h2>最近一次測驗</h2><a href="#results">查看分數 →</a></div>' : ''}`;
+  ${latest ? '<div class="section-heading"><h2>Latest quiz</h2><a href="#results">View score →</a></div>' : ''}`;
 }
 
 function vocabulary() {
-  return heading('VOCABULARY', '單字練習', '預設先練學術重點字。你可以依程度篩選，或直接搜尋全部單字。') + `
+  return heading('VOCABULARY', 'Vocabulary practice', 'Start with priority academic words. Filter by level or search the full library.') + `
     <div class="toolbar">
-      <label class="sr-only" for="search">搜尋單字</label>
-      <input id="search" type="search" placeholder="搜尋英文單字，例如 evidence" value="${escapeHtml(search)}">
-      <label><input id="only-level" type="checkbox" ${onlyLevel ? 'checked' : ''}>只顯示 ${level}</label>
+      <label class="sr-only" for="search">Search vocabulary</label>
+      <input id="search" type="search" placeholder="Search for a word, e.g. evidence" value="${escapeHtml(search)}">
+      <label><input id="only-level" type="checkbox" ${onlyLevel ? 'checked' : ''}>Show only ${level}</label>
     </div>
-    <div class="toolbar" aria-label="單字篩選">
-      ${[['academic','學術重點'],['all','全部單字'],['mastered','已掌握']].map(([key,label]) =>
+    <div class="toolbar" aria-label="Vocabulary filters">
+      ${[['academic','Academic words'],['all','All words'],['mastered','Mastered']].map(([key,label]) =>
         `<button class="seg" data-action="filter" data-key="${key}" aria-pressed="${filter === key}">${label}</button>`).join('')}
     </div>
     <p id="word-count" class="muted" aria-live="polite"></p>
@@ -104,29 +104,29 @@ function renderWords() {
     Number(bandB === level) - Number(bandA === level));
   const totalPages = Math.max(1, Math.ceil(matching.length / perPage));
   page = Math.min(page, totalPages - 1);
-  document.querySelector('#word-count').textContent = `共 ${matching.length.toLocaleString()} 個單字`;
+  document.querySelector('#word-count').textContent = `${matching.length.toLocaleString()} ${matching.length === 1 ? 'word' : 'words'}`;
   document.querySelector('#word-list').innerHTML = matching.slice(page * perPage, (page + 1) * perPage)
     .map(([word, [band, academic]]) => {
       const [part, definition, example] = window.dictionary[word];
       const known = mastered.has(word);
       return `<article class="panel word">
         <div><div class="pills"><span class="pill">${band}</span>
-          ${academic ? '<span class="pill academic">學術重點</span>' : ''}</div>
+          ${academic ? '<span class="pill academic">Academic words</span>' : ''}</div>
           <h2 lang="en">${word}</h2>
           <p lang="en"><em class="muted">${escapeHtml(part)}</em> ${escapeHtml(definition)}</p>
           ${example ? `<p class="muted" lang="en">${escapeHtml(example)}</p>` : ''}
         </div>
         <div class="word-actions">
-          <button data-action="speak" data-key="${word}" aria-label="播放 ${word} 的發音"><span aria-hidden="true">◖))</span> 發音</button>
+          <button data-action="speak" data-key="${word}" aria-label="Play pronunciation for ${word}"><span aria-hidden="true">◖))</span> Listen</button>
           <button class="${known ? 'checked' : ''}" data-action="master" data-key="${word}" aria-pressed="${known}">
-            ${known ? '✓ 已掌握' : '標記已掌握'}</button>
+            ${known ? '✓ Mastered' : 'Mark as mastered'}</button>
         </div>
       </article>`;
-    }).join('') || '<p class="panel">沒有符合條件的單字。</p>';
+    }).join('') || '<p class="panel">No words match your filters.</p>';
   document.querySelector('#pagination').innerHTML = totalPages > 1 ? `
-    <button data-action="page" data-key="-1" ${page === 0 ? 'disabled' : ''}>上一頁</button>
-    <span>第 ${page + 1} / ${totalPages} 頁</span>
-    <button data-action="page" data-key="1" ${page + 1 >= totalPages ? 'disabled' : ''}>下一頁</button>` : '';
+    <button data-action="page" data-key="-1" ${page === 0 ? 'disabled' : ''}>Previous page</button>
+    <span>Page ${page + 1} of ${totalPages}</span>
+    <button data-action="page" data-key="1" ${page + 1 >= totalPages ? 'disabled' : ''}>Next page</button>` : '';
 }
 
 function preferredReadings() {
@@ -139,15 +139,15 @@ function passage(article, includeAction) {
     <div class="pills"><span class="pill">${article.level}</span><span class="pill academic">${article.topic}</span></div>
     <h2 lang="en">${article.title}</h2>
     <div lang="en">${article.paragraphs.map(p => `<p>${p}</p>`).join('')}</div>
-    ${includeAction ? `<div class="actions"><a class="button primary" href="#quiz/${article.id}">做這篇測驗 →</a></div>` : ''}
+    ${includeAction ? `<div class="actions"><a class="button primary" href="#quiz/${article.id}">Take this quiz →</a></div>` : ''}
   </article>`;
 }
 
 function reading() {
   const list = preferredReadings();
   const article = list.find(item => item.id === activeReading) || list[0];
-  return heading('READING', '短文閱讀', '選一篇 B2 或 C1 短文，讀完後練習理解和分析。') +
-    `<div class="read-layout"><div class="read-list" aria-label="選擇文章">
+  return heading('READING', 'Short readings', 'Choose a B2 or C1 passage and practise interpreting its ideas and arguments.') +
+    `<div class="read-layout"><div class="read-list" aria-label="Choose a passage">
     ${list.map(item => `<button data-action="read" data-key="${item.id}" aria-pressed="${item === article}">
       <span class="pill">${item.level}</span> <strong lang="en">${item.title}</strong>
       <small class="muted">${item.summary}</small>
@@ -155,13 +155,13 @@ function reading() {
 }
 
 function quizList() {
-  return heading('ASSESSMENT','進階測驗','每篇 4 題，包含推論、作者立場與批判思考。交卷後即可查看逐題解析。') +
+  return heading('ASSESSMENT','Advanced quizzes','Each quiz has four questions on skills such as inference, author’s stance, and critical thinking. Submit to review each answer.') +
     `<div class="cards">${preferredReadings().map(article => `
     <a class="card" href="#quiz/${article.id}">
       <span class="pill">${article.level}</span><h3 lang="en">${article.title}</h3>
       <p>${article.summary} <span aria-hidden="true">→</span></p>
     </a>`).join('')}</div>
-    ${latest ? '<div class="section-heading"><a class="button" href="#results">查看最近分數</a></div>' : ''}`;
+    ${latest ? '<div class="section-heading"><a class="button" href="#results">View latest score</a></div>' : ''}`;
 }
 
 function quizView(article) {
@@ -171,20 +171,20 @@ function quizView(article) {
   const {index, answers} = quiz;
   const [type, prompt, options] = article.questions[index];
   const last = index === article.questions.length - 1;
-  return heading('ASSESSMENT','閱讀測驗',`${article.level} · 可邊讀文章邊作答。`) +
+  return heading('ASSESSMENT','Reading quiz',`${article.level} · Refer to the passage as you answer.`) +
     `<div class="quiz-layout">
       <form id="quiz-form" class="panel quiz-panel">
         <span class="pill">${type}</span>
-        <h2>第 ${index + 1} / ${article.questions.length} 題</h2>
-        <progress aria-label="測驗進度" value="${index + 1}" max="${article.questions.length}"></progress>
+        <h2>Question ${index + 1} of ${article.questions.length}</h2>
+        <progress aria-label="Quiz progress" value="${index + 1}" max="${article.questions.length}"></progress>
         <fieldset><legend id="question-title" lang="en" tabindex="-1">${prompt}</legend>
           ${options.map((option,i) => `<label class="option" lang="en">
             <input type="radio" name="answer" value="${i}" ${answers[index] === i ? 'checked' : ''}>
             <span>${option}</span></label>`).join('')}
         </fieldset>
         <div class="actions">
-          <button type="button" data-action="previous" ${index ? '' : 'disabled'}>上一題</button>
-          <button type="submit" class="primary" ${answers[index] === null ? 'disabled' : ''}>${last ? '交卷並看分數' : '下一題 →'}</button>
+          <button type="button" data-action="previous" ${index ? '' : 'disabled'}>Previous</button>
+          <button type="submit" class="primary" ${answers[index] === null ? 'disabled' : ''}>${last ? 'Submit and view score' : 'Next question →'}</button>
         </div>
       </form>
       ${passage(article,false)}
@@ -194,36 +194,36 @@ function quizView(article) {
 function results() {
   const article = readings.find(item => item.id === latest?.id);
   if (!article || !Array.isArray(latest.answers)) {
-    return heading('RESULTS','測驗結果','完成一篇測驗後，這裡會顯示分數與解析。') +
-      '<a class="button primary" href="#quiz">選擇測驗</a>';
+    return heading('RESULTS','Quiz results','Complete a quiz to see your score and answer explanations.') +
+      '<a class="button primary" href="#quiz">Choose a quiz</a>';
   }
   const correct = article.questions.filter((question,i) => question[3] === latest.answers[i]).length;
   const total = article.questions.length;
-  return heading('RESULTS','測驗結果',`${article.level} · ${article.title}`) + `
+  return heading('RESULTS','Quiz results',`${article.level} · ${article.title}`) + `
     <div class="panel result">
-      <p>本次成績</p><strong>${Math.round(100 * correct / total)} 分</strong><p>答對 ${correct}／${total} 題</p>
+      <p>Your score</p><strong>${Math.round(100 * correct / total)}%</strong><p>${correct} of ${total} correct</p>
     </div>
-    <div class="actions"><a class="button primary" href="#quiz/${article.id}" data-action="restart">再做一次</a>
-      <a class="button" href="#quiz">選其他測驗</a></div>
-    <div class="section-heading"><h2>逐題解析</h2></div>
+    <div class="actions"><a class="button primary" href="#quiz/${article.id}" data-action="restart">Try again</a>
+      <a class="button" href="#quiz">Choose another quiz</a></div>
+    <div class="section-heading"><h2>Answer review</h2></div>
     <div class="review">${article.questions.map(([type,prompt,options,answer,why],i) => {
       const selection = latest.answers[i];
       return `<article class="panel">
         <div class="pills"><span class="pill">${type}</span>
-        <span class="${selection === answer ? 'correct' : 'incorrect'}">${selection === answer ? '答對' : '答錯'}</span></div>
+        <span class="${selection === answer ? 'correct' : 'incorrect'}">${selection === answer ? 'Correct' : 'Incorrect'}</span></div>
         <h3 lang="en">${i + 1}. ${prompt}</h3>
-        <p>你的答案 <span lang="en">${options[selection] ?? '—'}</span></p>
-        <p>正確答案 <span lang="en">${options[answer]}</span></p><p class="muted">${why}</p></article>`;
+        <p>Your answer: <span lang="en">${options[selection] ?? '—'}</span></p>
+        <p>Correct answer: <span lang="en">${options[answer]}</span></p><p class="muted">${why}</p></article>`;
     }).join('')}</div>`;
 }
 
 function credits() {
-  return heading('CREDITS','教材來源','單字難度為本 app 的練習分級。') + `
+  return heading('CREDITS','Learning resources','Vocabulary levels are study recommendations.') + `
     <div class="panel article">
-      <h2>單字與閱讀</h2>
-      <p>語料分級參考 <a href="https://cental.uclouvain.be/cefrlex/efllex/">EFLLex</a>（UCLouvain CENTAL，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>），並由本 app 補充分級與 C2 挑戰字。</p>
-      <p>英語釋義節選自 <a href="https://github.com/wordset/wordset-dictionary">Wordset</a>（CC BY-SA 4.0，內含 WordNet 3.0。<a href="data/WORDSET-LICENSE.txt">授權全文</a>）。</p>
-      <p>閱讀與測驗為原創教材。發音使用瀏覽器語音合成功能。</p>
+      <h2>Vocabulary and reading</h2>
+      <p>Vocabulary levels draw on <a href="https://cental.uclouvain.be/cefrlex/efllex/">EFLLex</a> (UCLouvain CENTAL, <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>), with additional level assignments and C2 challenge words.</p>
+      <p>English definitions are adapted from <a href="https://github.com/wordset/wordset-dictionary">Wordset</a> (CC BY-SA 4.0, including WordNet 3.0). <a href="data/WORDSET-LICENSE.txt">Full licence notice</a>.</p>
+      <p>The readings and quizzes are original. Pronunciation uses your browser’s speech synthesis.</p>
     </div>`;
 }
 
@@ -326,7 +326,7 @@ app.addEventListener('click', event => {
   if (action === 'master') {
     if (mastered.has(key)) mastered.delete(key);
     else mastered.add(key);
-    status.textContent = mastered.has(key) ? `已標記 ${key}` : `已取消標記 ${key}`;
+    status.textContent = mastered.has(key) ? `Marked ${key} as mastered` : `Removed ${key} from mastered words`;
     saveProgress();
     renderWords();
     (document.querySelector(`[data-action=master][data-key="${key}"]`) ||
@@ -334,8 +334,8 @@ app.addEventListener('click', event => {
   }
   if (action === 'speak') {
     if (!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) {
-      status.textContent = '此瀏覽器無法播放發音。';
-      control.textContent = '發音無法使用';
+      status.textContent = 'Pronunciation is unavailable in this browser.';
+      control.textContent = 'Audio unavailable';
       return;
     }
     const utterance = new SpeechSynthesisUtterance(key);
@@ -343,8 +343,8 @@ app.addEventListener('click', event => {
     utterance.rate = 0.85;
     utterance.onerror = ({error}) => {
       if (error === 'interrupted' || error === 'canceled') return;
-      status.textContent = '無法播放發音，請檢查瀏覽器的英語語音設定。';
-      control.textContent = '發音無法使用';
+      status.textContent = 'Check your browser’s English voice settings to play pronunciations.';
+      control.textContent = 'Audio unavailable';
     };
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);

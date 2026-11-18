@@ -21,9 +21,9 @@ Created by two GEAP103 students.
 
 Download or clone this repository and open `index.html` in a modern browser. The site has no build step and can also be served as a static site from the repository root.
 
-- The Traditional Chinese interface offers B1, B2, C1 and C2 study settings. The vocabulary library contains 7,000 distinct entries, including 200 academic priority words. The selected level affects ordering and can be applied as an exact filter.
+- The English interface offers B1, B2, C1 and C2 study settings. The vocabulary library contains 7,000 distinct entries, including 200 academic priority words. The selected level affects ordering and can be applied as an exact filter.
 - Vocabulary includes English definitions, examples where available, pronunciation through browser speech synthesis, and a mastered-word list. Voice availability depends on the browser and operating system.
-- Four original B2–C1 passages each have four multiple-choice questions. Every quiz covers inference, author stance and critical thinking. Submission displays a score and explanations in Traditional Chinese.
+- Four original B2–C1 passages each have four multiple-choice questions. Every quiz covers inference, author stance and critical thinking. Submission displays a score and explanations in English.
 - The selected level, mastered words and latest result are saved in the same browser. No sign-in or backend is required.
 
 ### Data sources
